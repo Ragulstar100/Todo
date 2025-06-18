@@ -1,0 +1,2 @@
+connection String
+mongodb+srv://Ragul:<db_password>@remindi.oxcdv5o.mongodb.net/?retryWrites=true&w=majority&appName=RemindI
