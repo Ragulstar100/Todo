@@ -1,5 +1,5 @@
 import { appConfig } from "../config/Config.js"
-import * as mongoDal from "../dal/MongoDal.js"
+import * as mongoDal from "./MongoDal.js"
 
 const selectedDal =appConfig.db=="mongo"?mongoDal:null
 

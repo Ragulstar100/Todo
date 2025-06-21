@@ -1,19 +1,25 @@
-import { findUserByName,registerUser} from "../dal/UserDal.js";
+import { findUserByName,registerUser} from "../dal/Dal.js";
+import bcrypt from "bcryptjs";
+import jwt from "jsonwebtoken"
+import { appConfig } from "../config/Config.js";
 
-export function registerService(userData){
-   let user= findUserByName(userData.userName)
-   if(user){  
-        registerUser(userData.userName)
-   }else{
-        throw Error("User Already Exsists")
-   }
+export const registerService = async (userData)=>{
+    let user = await findUserByName(userData.userName);
+    if (user) {
+        throw new Error("User already exists")
+    }
+    user = await registerUser(userData);
+    return user;
 }
 
-export function loginService(userName,password){
-    let user= findUserByName(userName)  
-   if(!user||user.password==password){
-        console.log("Login Sucessfully")
-   }else{
-        throw Error("User Not Exsists")
-   }
+export const loginService = async (userName,password)=>{
+    let user=  await findUserByName(userName) 
+    
+    //!user used for null check if not used give exception if user is null
+    if(!user|| !(await bcrypt.compare(password,user.password))){
+          throw Error("Not Valid:Check your User Name Or password")
+    }
+
+   const token=jwt.sign({id:user._id},appConfig.jwt_key,{expiresIn:'1h'})
+   return {user,token};
 }

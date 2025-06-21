@@ -1,10 +1,9 @@
 import { UserModel } from "../model/UserModel.js";
 
-export const findUserByName = (userName)=>{
-      return UserModel.findOne({userName:userName})  
-}
+export const findUserByName = async (userName) => {
+ return UserModel.findOne({ userName }); 
+};
 
 export const registerUser = (userData)=>{
-    
-        UserModel.create({userName:"Ragul",password:"100"}) 
+       return UserModel.create(userData) 
 }
