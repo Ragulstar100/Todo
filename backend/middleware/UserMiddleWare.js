@@ -14,5 +14,6 @@ export const authenticate = (req, res, next) => {
     } catch {
         return res.status(401).json({error:'Invalid token'})
     }
+
 }
 

@@ -8,6 +8,8 @@ import taskRouter from "./backend/route/TaskRoute.js"
 const app=exp()
 
 app.use(exp.json())
+//app.use(express.urlencoded({ extended: true }));
+
 
 app.use('/auth',userRouter)
 app.use('/task',taskRouter)
