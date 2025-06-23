@@ -27,5 +27,5 @@ export const updateTask = async (taskId,taskData) =>{
 }
 
 export const deleteTask = (taskId) => {
-       return TaskModel.deleteOne(taskId)
+       return TaskModel.findByIdAndDelete(taskId)
 }

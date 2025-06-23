@@ -21,7 +21,7 @@ export const loginService = async (userName,password)=>{
     }
 
    const token=jwt.sign({id:user._id},appConfig.jwt_key,{expiresIn:'1h'})
-   return {user,token};
+   return {token};
 }
 
 export const addTaskService = (taskData)=>{

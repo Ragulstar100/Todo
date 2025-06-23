@@ -1,5 +1,5 @@
 import { TaskModel } from "../model/TaskModel.js"
-import { addTaskService, readTaskService, updateTaskService } from "../service/TaskService.js"
+import { addTaskService, readTaskService, updateTaskService,deleteTaskService} from "../service/TaskService.js"
 
 export const addTaskAction = async (req,res)=>{
     try{
@@ -24,15 +24,16 @@ export const readTaskAction = async (req,res)=>{
 
 export const updateTaskAction = async (req, res) => {
   try {
-    const result = await updateTaskService(req.params.id, req.body);
+   const result = await updateTaskService(req.params.id, req.body);
     res.status(200).json({ msg: "Data Updated" });
   } catch (err) {
-    res.status(500).json({ error: err.message }+req.parms.id);
+    res.status(400).json({ error: err.message });
   }
 }
 
 export const deleteTaskAction = async (req,res)=>{
     try{
+     await deleteTaskService(req.params.id)
     res.status(200).json({msg:"Your Data Delete Sucessfully"})    
     }catch(error){
     res.status(400).json({msg:error.message})

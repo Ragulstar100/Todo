@@ -1,5 +1,4 @@
-import { addTask, readTask, updateTask } from "../dal/MongoDal.js"
-import { TaskModel } from "../model/TaskModel.js"
+import { addTask, readTask, updateTask,deleteTask} from "../dal/MongoDal.js"
 
 export const addTaskService= (taskdata)=>{
 return addTask(taskdata)
@@ -10,13 +9,20 @@ return await readTask(taskId)
 }
 
 export const updateTaskService= async (taskId,taskData)=>{
+     let task = await readTask(taskId);
+
+       if (!task) { throw new Error("Task not found"); }
+
+     if (task.userId!=taskData.userId) { throw new Error("Invalid User"); }
+   
+
      return await updateTask(taskId, taskData);
 }
 
 export const deleteTaskService = async (taskId) => {
 
-     if (!taskId) {
-        throw new Error("Task ID is required for deletion");
+     let task = await readTask(taskId);
+     if (!task) {  throw new Error("Task Not Avaiable"); }
 
     return await deleteTask(taskId);
 }

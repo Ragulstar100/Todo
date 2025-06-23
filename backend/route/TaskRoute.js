@@ -11,5 +11,5 @@ taskRouter.use(authenticate)
 taskRouter.post('/create',addTaskAction)
 taskRouter.patch('/update/:id',updateTaskAction)
 taskRouter.get('/read',readTaskAction)
-taskRouter.delete('/delete',deleteTaskAction)
+taskRouter.delete('/delete/:id',deleteTaskAction)
 export default taskRouter;
