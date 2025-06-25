@@ -1,0 +1,32 @@
+ @import  "tailwindcss";
+ @tailwind utilities;
+
+ #root{
+    @apply w-screen h-screen flex flex-col 
+  }
+/* 
+  .textField{
+    @apply  w-80 h-auto rounded-b-xl relative 
+  }
+
+  .textField input{
+    all: unset;
+    @apply  border-amber-500 border-2 w-full p-2 rounded-l-2xl rounded-xl absolute
+  }
+
+  .textField input+label{
+    @apply translate-x-10 translate-y-1/4 text-[16px] bg-white inline absolute
+    
+  }
+
+  .textField input:focus+label,input:not(:placeholder-shown)+label{
+    @apply absolute translate-x-5 -translate-y-1/2 text-xl text-[13px] transition-transform duration-150 ease-in-out
+  } */
+
+
+
+
+
+  
+  
+

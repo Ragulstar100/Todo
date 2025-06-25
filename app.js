@@ -3,12 +3,15 @@ import { appConfig } from "./backend/config/Config.js"
 import {connectToMongoDb} from "./backend/db/MongoDb.js"
 import userRouter from "./backend/route/UserRoute.js"
 import taskRouter from "./backend/route/TaskRoute.js"
+import cors from "cors"
 
 
 const app=exp()
 
+app.use(cors())
+
 app.use(exp.json())
-//app.use(express.urlencoded({ extended: true }));
+
 
 
 app.use('/auth',userRouter)
