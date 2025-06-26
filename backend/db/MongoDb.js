@@ -7,7 +7,7 @@ export const connectToMongoDb = async () =>{
     await mon.connect(appConfig.mongo_url)
     console.log("Mongo Database Sucessfully")
   }catch(err){
-    throw new Error(err);
+    throw new Error(err); 
   }
 
 }
