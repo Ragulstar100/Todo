@@ -13,8 +13,8 @@ export const addTask = (taskData)=>{
        return TaskModel.create(taskData)
 }
 
-export const readTask = async (taskId) =>{
-       return TaskModel.findById(taskId)
+export const readTask = async (id) =>{
+       return TaskModel.find({userId:id})
 }
 
 export const updateTask = async (taskId,taskData) =>{

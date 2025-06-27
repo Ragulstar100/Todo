@@ -6,17 +6,18 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Auth from './pages/Auth'
 import Home from './pages/Home'
 import { useNavigate } from 'react-router-dom';
+import { getToken } from './db/localDb/Token';
 
 function App() {
   const navigate = useNavigate();
 
  
   useEffect(() => {
-    const token = localStorage.getItem('token');
+    const token = getToken()
     if (token) {
-      navigate('/home');
+      navigate('/')
     } else {
-      navigate('/');
+      navigate('/home');
     }
   }, []);
 

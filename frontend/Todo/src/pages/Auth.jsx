@@ -4,6 +4,8 @@ import TextField from '../ui(components)/TextField.jsx'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Home from '../pages/Home'
 import { useNavigate } from 'react-router-dom';
+import { login2 } from '../db/Common.js';
+import { getToken } from '../db/localDb/Token.js';
 
 
 function Auth(){
@@ -14,38 +16,17 @@ function Auth(){
   const [name,setName]=useState('')
   const [pwd,setPwd] =useState('')
  
-  const [res,setRes]=useState({res:'',token:(localStorage.getItem('token'))})
+  const token=getToken()
   
   const loginAction= async (name,password)=>{
 
-      const user={
-        userName:name,
-        password:password
-      }
+    let login = await login2(name,password)
 
-   
- 
-      fetch("http://localhost:5000/auth/login",{
-      method: 'POST',
-      headers: {
-      'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(user)  
-        }) .then(response => response.json())
-    .then(data => {
-    console.log('Login:',data.error?data.error:data.msg);
-    if(data.error){
-      setRes((d)=>{return {...d,res:data.error}})
+    if(login.isSucess()){
+      console.log("Sucessfully Login")
     }else{
-      setRes({res:'',token:data.token})
-      localStorage.setItem('token',data.token)
-
-    }                       
-    // maybe save token here
-  })
-  .catch(error => {
-    console.error('Login failed:', error);
-  });
+      alert("Login Failed")
+    }  
 
   }
 
@@ -72,7 +53,6 @@ function Auth(){
 
                 <TextField value={name} label="Name"  onInput={(v) => setName(v)} />
                 <TextField value={pwd} label="Password"  onInput={(v) => setPwd(v)} />
-                <p className='text-red-400 text-[13px]'>{res.res==''?res.token:res.res}</p>
                 <p className='text-blue-400' onClick={()=>{setTabChange(false)}}>Don't Have Account ?</p>
                 <button onClick={() => {loginAction(name,pwd)}} className='bg-blue-400 px-4 py-2 rounded-xl w-fit h-fit text-center self-end translate-x-3 -translate-y-2'>Login</button>
               
@@ -85,7 +65,6 @@ function Auth(){
                
                 <TextField value={name} label="Name"  onInput={(v) => setName(v)} />
                 <TextField value={pwd} label="Password"  onInput={(v) => setPwd(v)} />
-                <p className='text-red-400 text-[13px]'>{res}</p>
                 <p className='text-blue-400' onClick={()=>{setTabChange(true)}}>Already Have Account ?</p>
                 <button  onClick={()=>{}} className='bg-blue-400 px-4 py-2 rounded-xl w-fit h-fit text-center self-end translate-x-3 -translate-y-2'>Sign Up</button>
               

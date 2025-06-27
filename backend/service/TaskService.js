@@ -1,11 +1,12 @@
 import { addTask, readTask, updateTask,deleteTask} from "../dal/MongoDal.js"
+import jwt from "jsonwebtoken"
 
 export const addTaskService= (taskdata)=>{
 return addTask(taskdata)
 }
 
-export const readTaskService= async (taskId)=>{
-return await readTask(taskId)
+export const readTaskService= async (id)=>{
+return await readTask(id)
 }
 
 export const updateTaskService= async (taskId,taskData)=>{

@@ -2,7 +2,8 @@
 
 
 function Home(){
-  return <h1>Welcome</h1>
+  const token = localStorage.getItem('token');
+  return <h1>{token}</h1>
 }
 
 export default Home
