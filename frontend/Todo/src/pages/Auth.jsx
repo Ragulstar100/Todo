@@ -1,5 +1,5 @@
 
-import { useState } from 'react';
+import { use, useState } from 'react';
 import TextField from '../ui(components)/TextField.jsx'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Home from '../pages/Home'
@@ -17,6 +17,7 @@ function Auth(){
   const [pwd,setPwd] =useState('')
  
   const token=getToken()
+  const navigator=useNavigate()
   
   const loginAction= async (name,password)=>{
 
@@ -24,6 +25,7 @@ function Auth(){
 
     if(login.isSucess()){
       console.log("Sucessfully Login")
+      navigator('/home')
     }else{
       alert("Login Failed")
     }  

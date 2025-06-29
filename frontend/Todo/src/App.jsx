@@ -7,6 +7,9 @@ import Auth from './pages/Auth'
 import Home from './pages/Home'
 import { useNavigate } from 'react-router-dom';
 import { getToken } from './db/localDb/Token';
+import { tasks } from './db/Mongo';
+
+export let shareValue
 
 function App() {
   const navigate = useNavigate();
@@ -15,10 +18,11 @@ function App() {
   useEffect(() => {
     const token = getToken()
     if (token) {
-      navigate('/')
+      navigate('/home')
     } else {
-      navigate('/home');
+      navigate('/');
     }
+    
   }, []);
 
   return (

@@ -1,0 +1,4 @@
+React Toast-npm install react-toastify
+Mongoose-npm install Mongoose
+MongoDb-npm install mongodb
+NodeMon-npm install nodemon

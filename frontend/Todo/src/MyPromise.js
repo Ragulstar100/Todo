@@ -1,8 +1,12 @@
 import { data } from "react-router-dom"
+import { toast } from 'react-toastify';
+
+
 
 class MyPromise{
 
-    constructor(data,msg,error){
+    constructor(code,data,msg,error){
+        this.code=code
         this.data=data
         this.msg=msg
         this.error=error
@@ -13,18 +17,35 @@ class MyPromise{
     }
 }
 
-   export function errorPromise(error){
-    return MyPromise(null,null,error)
+   export function errorPromise(code,error){
+    return new MyPromise(null,null,null,error)
    }
+   /**
+    * 
+    * @param {string} url 
+    * @param {Request} req 
+    * @param {string} msg 
+    * @returns {Mypromise}
+    */
+ export async function myPromiseFetch(url, req, msg) {
+  const loadingToast = toast.loading("Loading...");
 
-   export async function myPromiseFetch(url,req,msg){
-        
-          try{  
-          let response= await fetch(url,req)
-          let data = await response.json()
-          return new MyPromise(data,msg,null)
-          }
-          catch(error){
-            return errorPromise("Failed To Fetch:"+error) 
-          }
+  try {
+    let response = await fetch(url, req);
+    let resdata = await response.json(); // Don't forget to await
+    let code = response.status;
+
+
+    if (!resdata.data) {
+      toast.update(loadingToast, { render: resdata?.error || "No Response", type: "error", isLoading: false, autoClose: 3000 });
+       
+      return errorPromise(code, resdata?.error || "No Response");
     }
+
+    return new MyPromise(code, resdata.data, msg, null);
+  } catch (error) {
+    toast.update(loadingToast, { render: "🚨 Failed to fetch", type: "error", isLoading: false, autoClose: 3000 });
+    
+    return errorPromise(null, "Failed To Fetch: ");
+  }
+}
