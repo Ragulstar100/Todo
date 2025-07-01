@@ -1,0 +1,61 @@
+React Toast-npm install react-toastify
+Mongoose-npm install Mongoose
+MongoDb-npm install mongodb
+NodeMon-npm install nodemon
+
+
+
+react-dom_client.js?v=fe26ee96:17985 Download the React DevTools for a better development experience: https://react.dev/link/react-devtools
+MyPromise.js:41 
+            
+            
+           POST http://localhost:5000/task/read 404 (Not Found)
+myPromiseFetch @ MyPromise.js:41
+tasks @ Mongo.js:33
+loadList @ Home.jsx:22
+(anonymous) @ Home.jsx:37
+react-stack-bottom-frame @ react-dom_client.js?v=fe26ee96:17476
+runWithFiberInDEV @ react-dom_client.js?v=fe26ee96:1483
+commitHookEffectListMount @ react-dom_client.js?v=fe26ee96:8458
+commitHookPassiveMountEffects @ react-dom_client.js?v=fe26ee96:8516
+commitPassiveMountOnFiber @ react-dom_client.js?v=fe26ee96:9885
+recursivelyTraversePassiveMountEffects @ react-dom_client.js?v=fe26ee96:9866
+commitPassiveMountOnFiber @ react-dom_client.js?v=fe26ee96:9982
+recursivelyTraversePassiveMountEffects @ react-dom_client.js?v=fe26ee96:9866
+commitPassiveMountOnFiber @ react-dom_client.js?v=fe26ee96:9879
+recursivelyTraversePassiveMountEffects @ react-dom_client.js?v=fe26ee96:9866
+commitPassiveMountOnFiber @ react-dom_client.js?v=fe26ee96:9879
+recursivelyTraversePassiveMountEffects @ react-dom_client.js?v=fe26ee96:9866
+commitPassiveMountOnFiber @ react-dom_client.js?v=fe26ee96:9879
+recursivelyTraversePassiveMountEffects @ react-dom_client.js?v=fe26ee96:9866
+commitPassiveMountOnFiber @ react-dom_client.js?v=fe26ee96:9982
+recursivelyTraversePassiveMountEffects @ react-dom_client.js?v=fe26ee96:9866
+commitPassiveMountOnFiber @ react-dom_client.js?v=fe26ee96:9982
+recursivelyTraversePassiveMountEffects @ react-dom_client.js?v=fe26ee96:9866
+commitPassiveMountOnFiber @ react-dom_client.js?v=fe26ee96:9879
+recursivelyTraversePassiveMountEffects @ react-dom_client.js?v=fe26ee96:9866
+commitPassiveMountOnFiber @ react-dom_client.js?v=fe26ee96:9879
+recursivelyTraversePassiveMountEffects @ react-dom_client.js?v=fe26ee96:9866
+commitPassiveMountOnFiber @ react-dom_client.js?v=fe26ee96:9897
+flushPassiveEffects @ react-dom_client.js?v=fe26ee96:11300
+(anonymous) @ react-dom_client.js?v=fe26ee96:11058
+performWorkUntilDeadline @ react-dom_client.js?v=fe26ee96:34
+<Home>
+exports.jsxDEV @ react_jsx-dev-runtime.js?v=fe26ee96:248
+App @ App.jsx:31
+react-stack-bottom-frame @ react-dom_client.js?v=fe26ee96:17422
+renderWithHooks @ react-dom_client.js?v=fe26ee96:4204
+updateFunctionComponent @ react-dom_client.js?v=fe26ee96:6617
+beginWork @ react-dom_client.js?v=fe26ee96:7652
+runWithFiberInDEV @ react-dom_client.js?v=fe26ee96:1483
+performUnitOfWork @ react-dom_client.js?v=fe26ee96:10866
+workLoopSync @ react-dom_client.js?v=fe26ee96:10726
+renderRootSync @ react-dom_client.js?v=fe26ee96:10709
+performWorkOnRoot @ react-dom_client.js?v=fe26ee96:10328
+performWorkOnRootViaSchedulerTask @ react-dom_client.js?v=fe26ee96:11621
+performWorkUntilDeadline @ react-dom_client.js?v=fe26ee96:34
+<App>
+exports.jsxDEV @ react_jsx-dev-runtime.js?v=fe26ee96:248
+(anonymous) @ main.jsx:10
+MyPromise.js:57 Failed to FetchSyntaxError: Unexpected token '<', "<!DOCTYPE "... is not valid JSON
+Home.jsx:30 nothing

@@ -19,8 +19,9 @@ function TextField(props) {
     className="absolute -top-1/20 left-5 bg-transprant 
     text-[13px] bg-white px-1
     transition-all duration-150 ease-in-out 
+    peer-[focus]:text-amber-500
     peer-placeholder-shown:top-5
-      peer-placeholder-shown:left-8
+    peer-placeholder-shown:left-8
     peer-placeholder-shown:text-[15px]"
   >
     {props.label}

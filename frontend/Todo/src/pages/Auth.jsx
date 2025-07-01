@@ -5,7 +5,8 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Home from '../pages/Home'
 import { useNavigate } from 'react-router-dom';
 import { login2 } from '../db/Common.js';
-import { getToken } from '../db/localDb/Token.js';
+import { getToken, setToken } from '../db/localDb/Token.js';
+import { ToastContainer } from 'react-toastify';
 
 
 function Auth(){
@@ -23,13 +24,10 @@ function Auth(){
 
     let login = await login2(name,password)
 
-    if(login.isSucess()){
-      console.log("Sucessfully Login")
-      navigator('/home')
-    }else{
-      alert("Login Failed")
-    }  
-
+      if(login.data){
+        setToken(login.data.token)
+        navigator('/home')
+      }
   }
 
  
@@ -38,6 +36,7 @@ function Auth(){
   return (
     <>
 
+      <ToastContainer/>
       <div className='flex justify-end items-center pr-5 h-15 bg-blue-400'>Welcome Todo Application</div>
 
       <div className='h-full flex items-center justify-center'>

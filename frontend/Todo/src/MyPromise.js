@@ -12,8 +12,12 @@ class MyPromise{
         this.error=error
     }
 
+    isInternalError(){
+      return this.code&&this.error
+    }
+
     isSucess(){
-        return !this.data.error
+        return this.data==null||!this.data.error
     }
 }
 
@@ -23,29 +27,34 @@ class MyPromise{
    /**
     * 
     * @param {string} url 
-    * @param {Request} req 
+    * @param {RequestInit} req 
     * @param {string} msg 
     * @returns {Mypromise}
     */
+
+  
  export async function myPromiseFetch(url, req, msg) {
-  const loadingToast = toast.loading("Loading...");
+ // const loadingToast = toast.loading("Loading...");
 
   try {
-    let response = await fetch(url, req);
-    let resdata = await response.json(); // Don't forget to await
-    let code = response.status;
+         
+    let response = await fetch(url,req);
+ 
+    let resdata = await response.json()
+    let code = response.status; 
 
 
-    if (!resdata.data) {
-      toast.update(loadingToast, { render: resdata?.error || "No Response", type: "error", isLoading: false, autoClose: 3000 });
-       
-      return errorPromise(code, resdata?.error || "No Response");
+    if (code!=200) {
+     // toast.update(loadingToast, { render: code+" "+resdata?.error || "No Response", type: "error", isLoading: false ,closeOnClick:true });
+      console.log( code+" "+resdata?.error || "No Response")
+      return errorPromise(code, resdata|| "No Response");
     }
 
-    return new MyPromise(code, resdata.data, msg, null);
+    return new MyPromise(code, resdata, msg, null);
   } catch (error) {
-    toast.update(loadingToast, { render: "🚨 Failed to fetch", type: "error", isLoading: false, autoClose: 3000 });
+   // toast.update(loadingToast, { render: "🚨 Failed to fetch:Server Not Connected", type: "error", isLoading: false, autoClose: 3000 });
     
-    return errorPromise(null, "Failed To Fetch: ");
+   console.log("Failed to Fetch"+error)
+    return errorPromise(null, "Failed To Fetch: "+error);
   }
 }

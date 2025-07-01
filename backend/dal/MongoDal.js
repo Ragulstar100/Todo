@@ -14,7 +14,9 @@ export const addTask = (taskData)=>{
 }
 
 export const readTask = async (id) =>{
-       return TaskModel.find({userId:id})
+      
+       
+       return await TaskModel.find({userId:id})
 }
 
 export const updateTask = async (taskId,taskData) =>{
@@ -26,6 +28,6 @@ export const updateTask = async (taskId,taskData) =>{
     )
 }
 
-export const deleteTask = (taskId) => {
-       return TaskModel.findByIdAndDelete(taskId)
+export const deleteTask =async (taskId) => {
+       return await TaskModel.findByIdAndDelete(taskId)
 }
