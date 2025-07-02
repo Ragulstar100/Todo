@@ -50,9 +50,9 @@ export class MyPromise{
 
     if (code!=200) {
      // toast.update(loadingToast, { render: code+" "+resdata?.error || "No Response", type: "error", isLoading: false ,closeOnClick:true });
-      console.log( code+" "+resdata?.error || "No Response")
-      return errorPromise(code, resdata|| "No Response");
+      return errorPromise(code, resdata.error|| "No Response");
     }
+
 
     return new MyPromise(code, resdata, msg, null);
   } catch (error) {

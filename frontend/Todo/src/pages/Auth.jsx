@@ -27,8 +27,9 @@ function Auth(){
 
     let login = await login2(name,password)
 
-      if(login.data.token){
-         setToken(login.data.token)
+
+      if(login.data?.token){
+        setToken(login.data.token)
         navigator('/home')
       }else if(login.isInternalError()){
        toast.info(login.error,{autoClose:false,position:"top-center"})

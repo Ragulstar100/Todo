@@ -6,7 +6,7 @@ export const addTaskAction = async (req,res)=>{
     await addTaskService(req.body)
     res.status(200).json({msg:"Your Data added Sucessfully"})    
     }catch(error){
-    res.status(400).json({msg:error.message})
+    res.status(400).json({error:error.message})
     }
 
 }
@@ -16,7 +16,8 @@ export const readTaskAction = async (req,res)=>{
     var task= await readTaskService(req.user.id)
     res.status(200).json({id:req.user.id,task:task})    
     }catch(error){
-    res.status(400).json({msg:error.message})
+      console.log(error)
+    res.status(400).json({error:error.message})
     }
 }
 
@@ -36,7 +37,7 @@ export const deleteTaskAction = async (req,res)=>{
      await deleteTaskService(req.params.id)
     res.status(200).json({msg:"Your Data Delete Sucessfully"})    
     }catch(error){
-    res.status(400).json({msg:error.message})
+    res.status(400).json({error:error.message})
     }
 }
 
