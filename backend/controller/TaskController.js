@@ -14,7 +14,7 @@ export const addTaskAction = async (req,res)=>{
 export const readTaskAction = async (req,res)=>{
     try{
     var task= await readTaskService(req.user.id)
-    res.status(200).json(task)    
+    res.status(200).json({id:req.user.id,task:task})    
     }catch(error){
     res.status(400).json({msg:error.message})
     }

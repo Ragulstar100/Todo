@@ -6,32 +6,35 @@ import 'react-toastify/dist/ReactToastify.css';
 import { toast } from 'react-toastify';
 import { useNavigate } from "react-router-dom";
 import TextField from "../ui(components)/TextField";
-
+import {MyPromise} from "../MyPromise"
 
 
 function Home(){
   const token =getToken()
-  const [taskList,setTaskList]=useState([])
-  const [myRes,setMyRes]=useState({}) 
-  const [currentTask,setCurrentTask]=useState({}) 
+  const [myRes,setMyRes]=useState(new MyPromise()) 
+  const [currentTask,setCurrentTask]=useState(undefined) 
 
+ 
   const nav=useNavigate()
 
 
   const loadList=()=>{
       tasks(token).then((v)=>{
-        setMyRes(v)
         if(v.data){
-        console.log(v.data)  
-        setTaskList(v.data)
+        setMyRes({...myRes,data:v.data}) 
         }else if(v.isInternalError()){
-         nav('/')
+        toast.error("Your Session Expried Press Logout And Login Again",{autoClose:false,position:"top-center"})
         }else{
-          console.log("nothing")
+        toast.info("Server Down",{autoClose:false,position:"top-center"})
         }
       }
       )
   }
+
+  const addTask=()=>{
+
+  }
+
 
   useEffect(()=>{  
   loadList()  
@@ -42,54 +45,74 @@ function Home(){
   <ToastContainer />
 
     <div className="bg-blue-400 p-4 flex justify-end">
-    <button className="text-white" onClick={()=>{ 
+    <button className="text-white text-xl" onClick={()=>{ 
       removeToken()
       nav('/')  }}>
         Logout
       </button>
       </div>
     
-      <div className="flex flex-wrap mt-1 gap-1 w-full justify-between">
+     {true?  <div className="flex flex-wrap mt-1 gap-1 w-full justify-between">
       
-      <div className="flex flex-col w-[350px] h-full">
-      <button className="px-6 py-3 bg-green-300 w-fit h-fit rounded-xl mt-2 ml-2" >Add</button> 
-       
-      <TextField label="Description"></TextField>
-      <select name="" onChange={(v)=>{
-        console.log(v.target.value)
-      }}>
-        <option value="none">--Select Any One--</option>
-        <option value="Assigned">Assign</option>
-         <option value="Cancelld" >Cancel</option>
-        <option value="Completed">Complete</option>
-      </select>
-      </div>
-     
-      <table className="w-1/2 items-end mr-2">
-            <tr className=" bg-blue-400">
-      <th className={taskTableSheelStyle+" rounded-l-xl p-2"}>S.no</th>
-      <th className={taskTableSheelStyle} >Updated Date</th>
-      <th className={taskTableSheelStyle}>Description</th>
-      <th className={taskTableSheelStyle+" rounded-r-xl p-2"}>Status</th>
-    </tr>
-    {
-      taskList.map((v,i)=>{
-        console.log(v)
-        return  <tr key={i}>
-          <td className={taskTableSheelStyle}>{i}</td>
-          <td className={taskTableSheelStyle}>{formatTimestamp(v.updatedAt)}</td>
-          <td className={taskTableSheelStyle}>{v.description}</td>
-          <td className={taskTableSheelStyle}>{v.status}</td>
-        </tr>
-        
-      })
-    }
-      </table>
+      
+      <div className="flex items-center flex-col w-sm min-w-sm h-full">
+      <TextField label="Description" className="w-80 mt-5" onInput={(v)=>{
 
-    </div>
+      }} value={currentTask?currentTask.description:"hello"} ></TextField>
+      <select name="" className="py-3  w-78 text-center
+         bg-white border border-gray-300 rounded-md shadow-sm
+         text-gray-700 text-sm font-medium
+         focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500
+         appearance-none pr-8 " onChange={(v)=>{
+        
+      }} value={"Cancelld"}>
+        <option  value="Not opened" className="text-blue-400 h-fit">Not Open</option>
+         <option value="Cancelled" className="text-blue-400 h-fit">Cancel</option>
+        <option value="Completed" className="text-blue-400 h-fit">Complete</option>
+      </select>
+      <button className="self-end px-6 py-3 bg-blue-300 w-fit h-fit rounded-xl mt-2 mr-8" >{currentTask?"Update":"Add"}</button> 
+      </div>
+
+
+
+      <div className="flex flex-col  w-1/2 h-10 mr-2 min-w-sm">
+
+      <div className="flex  bg-blue-400 w-full h-fit rounded-xl">
+      <p className={taskTableSheelStyle+" w-1/9"} >S.no</p>
+      <p className={taskTableSheelStyle+" w-3/9 "} >Updated Date</p>
+      <p className={taskTableSheelStyle+" w-3/9 "} >Description</p>
+      <p className={taskTableSheelStyle+"w-2/9"} >Status</p>
+      </div> 
+      
+      {
+        Array.from(myRes.data?.task||[]).map((v,i)=>{
+         return (
+  <div key={i} className={`flex hover:bg-blue-200 cursor-pointer  ${ currentTask==v? 'bg-blue-300':''}`} onClick={()=>{
+    setCurrentTask(v)
+  }}>
+    <p className={taskTableSheelStyle+" w-1/9"}>{i+1}</p>
+    <p className={taskTableSheelStyle+" w-3/9"} >{formatTimestamp(v.updatedAt)}</p>
+    <p className={taskTableSheelStyle+" w-3/9"}>{v.description}</p>
+    <p className={taskTableSheelStyle+" w-2/9"}>{v.status}</p>
+  </div>
+) 
+        })   
+      }
+      
+     <button className="p-3 hover:bg-blue-200" onClick={()=>{
+      setCurrentTask(undefined)
+     }}>Add Task</button>
+
+      </div>
+
+
+
+       </div> :<h1 className="w-full text-6xl text-center py-4">401 Invalid Token</h1>}
 
   </>
 }
+
+
 
 function formatTimestamp(timestamp) {
   const date = new Date(timestamp);

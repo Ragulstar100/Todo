@@ -3,7 +3,8 @@ import { toast } from 'react-toastify';
 
 
 
-class MyPromise{
+export class MyPromise{
+
 
     constructor(code,data,msg,error){
         this.code=code
@@ -12,17 +13,18 @@ class MyPromise{
         this.error=error
     }
 
+    /**
+     * 
+     * @returns {Boolean}
+     */
     isInternalError(){
       return this.code&&this.error
     }
 
-    isSucess(){
-        return this.data==null||!this.data.error
-    }
 }
 
    export function errorPromise(code,error){
-    return new MyPromise(null,null,null,error)
+    return new MyPromise(code,undefined,undefined,error)
    }
    /**
     * 
@@ -35,11 +37,13 @@ class MyPromise{
   
  export async function myPromiseFetch(url, req, msg) {
  // const loadingToast = toast.loading("Loading...");
+ 
 
   try {
-         
-    let response = await fetch(url,req);
+
  
+    let response = await fetch(url,req);
+      
     let resdata = await response.json()
     let code = response.status; 
 
@@ -52,9 +56,10 @@ class MyPromise{
 
     return new MyPromise(code, resdata, msg, null);
   } catch (error) {
+   
    // toast.update(loadingToast, { render: "🚨 Failed to fetch:Server Not Connected", type: "error", isLoading: false, autoClose: 3000 });
     
    console.log("Failed to Fetch"+error)
-    return errorPromise(null, "Failed To Fetch: "+error);
+    return errorPromise(undefined, "Failed To Fetch: "+error);
   }
 }

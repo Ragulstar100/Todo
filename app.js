@@ -8,6 +8,8 @@ import cors from "cors"
 
 const app=exp()
 
+//app.use(cors())
+
 app.use(cors())
 
 app.use(exp.json())

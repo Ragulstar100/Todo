@@ -5,6 +5,7 @@ import { myPromiseFetch } from "../MyPromise";
 
 export const login2= async (name,password)=>{
 
+
   let user={
       userName:name,
       password:password
@@ -32,3 +33,17 @@ export const tasks = async (token) => {
 
   return await myPromiseFetch("http://localhost:5000/task/read", req);
 };
+
+export const addTask = async (token,task)=>{
+  const req = {
+    method: 'POST',
+    headers: {
+      'Content-Type':'application/json',
+      'Authorization':`Bearer ${token}`
+    },
+    body:task
+  };
+
+  return await myPromiseFetch("http://localhost:5000/task/create", req);
+
+}
