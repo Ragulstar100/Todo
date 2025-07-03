@@ -4,7 +4,7 @@ import TextField from '../ui(components)/TextField.jsx'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Home from '../pages/Home'
 import { useNavigate } from 'react-router-dom';
-import { login2 } from '../db/Common.js';
+import { login2,signUp } from '../db/Common.js';
 import { getToken, setToken } from '../db/localDb/Token.js';
 import { ToastContainer,toast } from 'react-toastify';
 
@@ -44,7 +44,7 @@ function Auth(){
   return (
     <>
 
-      <ToastContainer/>
+
       <div className='flex justify-end items-center pr-5 h-15 bg-blue-400'>Welcome Todo Application</div>
 
       <div className='h-full flex items-center justify-center'>
@@ -76,9 +76,24 @@ function Auth(){
                 <TextField value={repwd} label="Re-type Password" className="w-80" onInput={(v) => setRePwd(v)} />  
                 <p className='text-blue-400' onClick={()=>{setTabChange(true)}}>Already Have Account ?</p>
                 <button  onClick={()=>{
-                  if(pwd==repwd){
+                  if(pwd.trim()!=''&&pwd==repwd&&name.trim()!=''){
+                    signUp(name,pwd).then((v)=>{
+                      if(!v.error){          
+                      toast.success(msg,{autoClose:false,position:"top-center"})
+                      }else if(v.code&&v.error){
+                           toast.error(v.error,{autoClose:false,position:"top-center"})
+                      }else{
+                         toast.error(v.error,{autoClose:false,position:"top-center"})
+                      }
+
                     
-                  }else{
+                    }).catch((e)=>{
+                           toast.error(e,{autoClose:false,position:"top-center"})
+                    })
+                  }else if(name.trim()==''){
+                     toast.error("Enter Your User Name",{autoClose:false,position:"top-center"})
+                  }
+                  else{
                   toast.error("Enter Your Password Correctly",{autoClose:false,position:"top-center"})
                   }
                 }} className='bg-blue-400 px-4 py-2 rounded-xl w-fit h-fit text-center self-end translate-x-3 -translate-y-2'>Sign Up</button>
@@ -92,7 +107,7 @@ function Auth(){
         </div>
 
       </div>
-
+                <ToastContainer/>
     </>
   )
 }

@@ -84,10 +84,10 @@ import {MyPromise} from "../MyPromise.js"
         currentTask?._id&&(<button className="px-6 py-3 bg-blue-300 w-fit h-fit rounded-xl mt-2" onClick={
         ()=>{
          deleteTask(token,currentTask._id).then((v)=>{
-          if(v.isInternalError){
+          if(v.error){
           toast.error(v.error,{autoClose:false,position:"top-center"})
-        }else if(v.code==200){
-           toast.done("Data Deleted Sucessfully",{autoClose:false,position:"top-center"})  
+        }else {
+           toast.success("Data Deleted successfully",{autoClose:false,position:"top-center"})  
         }
         loadList()
          }) 
@@ -104,7 +104,7 @@ import {MyPromise} from "../MyPromise.js"
         if(v.isInternalError&&v.code!=200){
           toast.error(v.code,{autoClose:false,position:"top-center"})
         }else if(v.code==200){
-           toast.done("Data Added Sucessfully",{autoClose:false,position:"top-center"})  
+           toast.success("Data Added successfully",{autoClose:false,position:"top-center"})  
         }
 
         loadList()
@@ -112,14 +112,14 @@ import {MyPromise} from "../MyPromise.js"
 
       }
       else{
-        
+
        updateTask(token,currentTask._id,currentTask.status,currentTask.description).then((v)=>{
 
             
-        if(v.isInternalError){
-          toast.error(v.error,{autoClose:false,position:"top-center"})
-        }else if(v.code==200){
-           toast.done("Data Updated Sucessfully",{autoClose:false,position:"top-center"})  
+        if(!v.error){
+          toast.success("Data Updated successfully",{autoClose:false,position:"top-center"})  
+        }else {
+              toast.error(v.error,{autoClose:false,position:"top-center"})
         }
         loadList()
 
@@ -145,7 +145,9 @@ import {MyPromise} from "../MyPromise.js"
       </div> 
       
       {
-        Array.from(myRes.data?.task||[]).map((v,i)=>{
+   
+
+     Array.from(myRes.data?.task||[]).length!=0? Array.from(myRes.data?.task).map((v,i)=>{
          return (
   <div key={i} className={`flex hover:bg-blue-200 cursor-pointer  ${ currentTask?._id&&currentTask._id==v._id? 'bg-blue-300':''}`} onClick={()=>{
     setCurrentTask(v)
@@ -155,8 +157,8 @@ import {MyPromise} from "../MyPromise.js"
     <p className={taskTableSheelStyle+" w-3/9"}>{v.description}</p>
     <p className={taskTableSheelStyle+" w-2/9"}>{v.status}</p>
   </div>
-) 
-        })   
+)     }): <p className="w-full h-20 text-center p-4">No Task</p>
+
       }
       
      <button className={`p-3 hover:bg-blue-200 ${ myRes.data?.task&&currentTask?'':'bg-blue-400'}`} onClick={()=>{
