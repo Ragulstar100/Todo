@@ -6,4 +6,12 @@
   font-optical-sizing: auto;
 }
 
+.dark{
+  @apply bg-black/80 text-white
+}
+
+
+
+
+
 

@@ -5,8 +5,9 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { toast } from 'react-toastify';
 import { useNavigate } from "react-router-dom";
-import TextField from "../ui(components)/TextField";
+import TextField from '../components/TextField.jsx'
 import {MyPromise} from "../MyPromise.js"
+import { NavBar } from "../components/NavBar.jsx";
 
 
 
@@ -15,7 +16,7 @@ import {MyPromise} from "../MyPromise.js"
  function Home(){
  
 
-    const token =getToken()
+  const token =getToken()
   const [myRes,setMyRes]=useState(new MyPromise()) 
   const [currentTask,setCurrentTask]=useState(undefined) 
 
