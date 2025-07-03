@@ -6,22 +6,14 @@ import 'react-toastify/dist/ReactToastify.css';
 import { toast } from 'react-toastify';
 import { useNavigate } from "react-router-dom";
 import TextField from "../ui(components)/TextField";
-import {MyPromise} from "../MyPromise.js"
-
-
-
-  let taskTableSheelStyle=" p-3 text-center"
- 
- function Home(){
- 
-
-    const token =getToken()
+import {MyPromise} from "../MyPromise"
+  const token =getToken()
   const [myRes,setMyRes]=useState(new MyPromise()) 
   const [currentTask,setCurrentTask]=useState(undefined) 
 
  
   const nav=useNavigate()
-
+  
 
   const loadList=()=>{
       tasks(token).then((v)=>{
@@ -40,14 +32,13 @@ import {MyPromise} from "../MyPromise.js"
   }
 
 
+
   useEffect(()=>{  
   loadList()  
   },[])
 
-
- 
- 
- return <>
+  let taskTableSheelStyle=" p-3 text-center"
+  return <>
   <ToastContainer />
 
     <div className="bg-blue-400 p-4 flex justify-end">
@@ -58,7 +49,7 @@ import {MyPromise} from "../MyPromise.js"
       </button>
       </div>
     
-     { myRes.code==401 ?  <h1 className="w-full text-6xl text-center py-4">401 Invalid Token</h1>:<div className="flex flex-wrap mt-1 gap-1 w-full justify-between">
+     {myRes.code==401 ?  <h1 className="w-full text-6xl text-center py-4">401 Invalid Token</h1>:<div className="flex flex-wrap mt-1 gap-1 w-full justify-between">
       
       
       <div className="flex items-center flex-col w-sm min-w-sm h-full">
@@ -96,8 +87,7 @@ import {MyPromise} from "../MyPromise.js"
        
       }
       <button onClick={()=>{
-      
-      if(!currentTask._id) {
+       if(!currentTask._id) {
 
         addTask(token,myRes.data.id,currentTask.status||"Not opened",currentTask.description||"none").then((v)=>{
     
@@ -110,9 +100,6 @@ import {MyPromise} from "../MyPromise.js"
         loadList()
        });
 
-      }
-      else{
-        
        updateTask(token,currentTask._id,currentTask.status,currentTask.description).then((v)=>{
 
             
@@ -170,8 +157,7 @@ import {MyPromise} from "../MyPromise.js"
        </div> }
 
   </>
- }
-
+}
 
 
 
