@@ -10,6 +10,8 @@ import { tasks } from './db/Mongo';
 import { AppRoutes } from './roter/Route';
 import { ThemeProvider } from './context/themeContext';
 import { ToastContainer,toast } from 'react-toastify';
+import { ErrorProvider } from './context/errorContext';
+import { MessageProvider } from './context/messageProvider';
 
 export let shareValue
 
@@ -28,9 +30,16 @@ function App() {
   }, []);
 
   return (
+   
    <ThemeProvider>
-    <AppRoutes/>
-    <ToastContainer/>
+     <MessageProvider> 
+     <ErrorProvider> 
+     <AppRoutes/>
+     <ToastContainer/>
+    </ErrorProvider>
+    </MessageProvider>
+   
+
   </ThemeProvider>
 
   );

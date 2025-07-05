@@ -1,5 +1,5 @@
 
-import { myPromiseFetch } from "../MyPromise";
+import { myPromiseFetch,myPromiseFetch2} from "../MyPromise";
 
 
 
@@ -36,8 +36,9 @@ export const signUp =async (name,password)=>{
     },
     body:JSON.stringify(user)
   }
+
   
-   return await myPromiseFetch("http://localhost:5000/auth/register",req)
+   return await myPromiseFetch2("http://localhost:5000/auth/register",req)
 }
 
 export const tasks = async (token) => {
