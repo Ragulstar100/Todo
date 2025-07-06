@@ -20,7 +20,7 @@ export const login2= async (name,password)=>{
     body:JSON.stringify(user)
   }
   
-   return await myPromiseFetch("http://localhost:5000/auth/login",req)
+   return await myPromiseFetch2("http://localhost:5000/auth/login",req)
 }
 
 export const signUp =async (name,password)=>{

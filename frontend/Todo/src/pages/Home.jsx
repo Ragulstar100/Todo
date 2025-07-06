@@ -11,6 +11,7 @@ import { NavBar } from "../components/NavBar.jsx";
 
 
 
+
   let taskTableSheelStyle=" p-3 text-center"
  
  function Home(){
@@ -49,20 +50,18 @@ import { NavBar } from "../components/NavBar.jsx";
  
  
  return <>
-  <ToastContainer />
+    
 
     <div className="bg-blue-400 p-4 flex justify-end">
-    <button className="text-white text-xl" onClick={()=>{ 
-      removeToken()
-      nav('/')  }}>
-        Logout
-      </button>
+     <NavBar getTabChange={(v)=>{ }}/>
       </div>
     
-     { myRes.code==401 ?  <h1 className="w-full text-6xl text-center py-4">401 Invalid Token</h1>:<div className="flex flex-wrap mt-1 gap-1 w-full justify-between">
-      
-      
-      <div className="flex items-center flex-col w-sm min-w-sm h-full">
+     { myRes.code==401 ?  <h1 className="w-full text-6xl text-center py-4">401 Invalid Token</h1>:
+     
+        
+        <div className="flex flex-wrap mt-1 gap-1 w-full justify-between">
+    
+      <div className="flex items-center flex-col  min-w-[10vw] h-full">
       <TextField label="Description" className="w-80 mt-5" onInput={(v)=>{
                 setCurrentTask({...currentTask,description:v})
                 
@@ -170,7 +169,9 @@ import { NavBar } from "../components/NavBar.jsx";
 
 
 
-       </div> }
+       </div> 
+       
+       }
 
   </>
  }

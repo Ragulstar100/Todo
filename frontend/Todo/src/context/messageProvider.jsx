@@ -24,9 +24,13 @@ export function MessageProvider({children}){
                             const toastMsgError=(msg)=>{
                                 toast.error(msg,{autoClose:false,position:"top-center"})
                             }
+                             
+                            const loadingMsg=(cond)=>{
+                                    toast.loading("Loading...",{autoClose:cond?false:100})
+                            }
     
 
-return <_messageContext.Provider value={{msgBox,msgErrorBox,toastMsg,toastMsgError}}>
+return <_messageContext.Provider value={{msgBox,msgErrorBox,toastMsg,toastMsgError,loadingMsg}}>
 {children}
 </_messageContext.Provider>    
 }

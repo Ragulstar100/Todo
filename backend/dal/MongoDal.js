@@ -1,8 +1,13 @@
 import { TaskModel } from "../model/TaskModel.js";
 import { UserModel } from "../model/UserModel.js";
 
-export const findUserByName = async (userName) => {
- return UserModel.findOne({ userName }); 
+export const findUserByName = async (userName,select) => {
+    
+ if(select){         
+ return  UserModel.findOne({ userName }).select(select); 
+ }else{
+  return UserModel.findOne({ userName })    
+ }
 };
 
 export const registerUser = (userData)=>{

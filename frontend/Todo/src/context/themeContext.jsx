@@ -7,16 +7,18 @@ export const context=()=> useContext(themeContext)
 
 export function ThemeProvider({children}){
 
+   const [enableDarkMode,setEnableDarkMode]=useState(true)
 
-    
-    const [enableDarkMode,setEnableDarkMode]=useState(true)
+   const getTheme= ()=>{
+            if(enableDarkMode){
+                return "dark"
+            }else{
+                return "light"
+            }
+   }
 
-    useEffect(()=>{
-      if(enableDarkMode){
-        document.documentElement.classList.add('dark')
-      }else{
-        document.documentElement.classList.remove('dark')
-      }    
+    useEffect(()=>{    
+    document.getElementById("root").setAttribute("theme", getTheme());  
 
     },[enableDarkMode])
 
@@ -24,9 +26,13 @@ export function ThemeProvider({children}){
         setEnableDarkMode(!enableDarkMode)
     }
 
+    
+
    return (
-   <themeContext.Provider value={{enableDarkMode,changeTheme}}>
+   <themeContext.Provider value={{enableDarkMode,changeTheme,getTheme}}>
+        
         {children}
+
     </themeContext.Provider>)
 
     

@@ -1,13 +1,23 @@
 @import "tailwindcss";
 @import url('https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,100..900;1,100..900&display=swap');
 
-#root{
+*{
   font-family: "Jost", sans-serif;
   font-optical-sizing: auto;
 }
 
-.dark{
-  @apply bg-black/80 text-white
+
+
+[theme="light"]{
+  @apply bg-white 
+}
+
+[theme="dark"]{
+  @apply bg-[#58595a] text-amber-50
+}
+
+div{
+  @apply bg-inherit
 }
 
 
@@ -15,3 +25,4 @@
 
 
 
+                              

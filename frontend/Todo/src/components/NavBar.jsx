@@ -1,5 +1,7 @@
 import { context } from "../context/themeContext"
 import { useEffect, useState } from "react";
+import { getToken,removeToken} from "../db/localDb/Token";
+
 
 
 export function NavBar({getTabChange}){
@@ -12,15 +14,17 @@ export function NavBar({getTabChange}){
         getTabChange(tabChange);
         }, [tabChange]);
 
-    return <div className="flex justify-end gap-5 p-4">
-        
-          <div className=' border-1 border-blue-400 flex w-[200px] h-12  rounded-xl items-center mt-2.5'>
+    return <div className="flex justify-end gap-5 p-4 items-center">
+
+    
+        <img src={enableDarkMode?"sun.png":"moon.png"} className="w-12 h-12  rounded-xl bg-black/10 p-1" alt="" onClick={()=>{ changeTheme()  }} />
+
+         {
+          !getToken()?<div className=' border-1 !border-blue-400 flex w-[200px] h-12  rounded-xl items-center'>
             <p  onClick={() => setTabChange(true)} className={`bg-clip-border w-1/2 h-full p-3 rounded-l-xl ${!tabChange ? 'bg-transparent' : 'bg-blue-400'}`}> Log In </p>
             <p onClick={() => setTabChange(false)} className={`bg-clip-border w-1/2 h-full p-3 rounded-r-xl ${!tabChange ? 'bg-blue-400' : 'bg-transparent'}`}> Sign Up </p>
-          </div>
+          </div>:  <p  onClick={() => setTabChange(true)} className={`bg-clip-border w-25 h-full p-3 rounded-xl bg-blue-400`}> Log Out </p>}
 
-        <button onClick={()=>{
-            changeTheme()
-        }}>{enableDarkMode?"Light Theme":"Dark Theme"}</button>
+
         </div>
 }

@@ -71,7 +71,7 @@ export class MyPromise{
     */
  export async function myPromiseFetch2(url, req, msg) {
 
-  let response;
+  let response
 
     try{
        response = await fetch(url,req);
@@ -79,16 +79,19 @@ export class MyPromise{
       throw errorPromise("L404", "Failed To Fetch:"+error);
     }
 
+
+
     let jsonData=await response.json()
     if(response.status!=200) {
       if(jsonData.data){
-      throw new MyPromise(response.status,jsonData.data,undefined,resdata.error|| "No Response")  
+      throw new MyPromise(response.status,jsonData,undefined,resdata.error|| "No Response")  
       }else{
-      throw errorPromise(response.status, jsonData.error|| "No Response")   
+      throw errorPromise(response.status, jsonData|| "No Response")   
       }
     }
 
-    return new MyPromise(response.status,response.data, msg, null);
+    
+    return new MyPromise(response.status,jsonData, msg, null);
 
 }
 
