@@ -14,7 +14,7 @@ export function SignupBox(){
         const [repwd,setRePwd] =useState('')
     
 
-return    <div className='flex flex-col gap-4 items-center w-100 h-fit py-10 rounded-2xl shadow-lg shadow-black/40 scale-[1.0]'> 
+return    <div className='flex flex-col gap-4 items-center w-100 h-fit py-10 rounded-2xl shadow-lg shadow-black/40 scale-[0.9]'> 
                
                 <h1 className='text-2xl'>Sign Up</h1>
                 <p className='text-blue-300 text-xl' >Register Your Account</p>        

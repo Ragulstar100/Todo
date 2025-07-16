@@ -20,6 +20,9 @@ div{
   @apply bg-inherit
 }
 
+button{
+  @apply bg-blue-500
+}
 
 
 
